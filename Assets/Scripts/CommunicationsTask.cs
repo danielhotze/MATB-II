@@ -9,12 +9,12 @@ public class CommunicationsTask : MonoBehaviour
 {
     // Define Unity Game Objects
     ToggleGroup toggleGroupInstance;
-    [SerializeField] Button submitButton;
-    [SerializeField] TextMeshProUGUI changedText;
-    [SerializeField] List<TextMeshProUGUI> comLabels;
-    [SerializeField] GameObject CallSignContainer;
-    [SerializeField] List<TextMeshProUGUI> CallSign;
-    [SerializeField] List<Color32> Colors;
+    public Button submitButton;
+    public TextMeshProUGUI changedText;
+    public List<TextMeshProUGUI> comLabels;
+    public GameObject CallSignContainer;
+    public List<TextMeshProUGUI> CallSign;
+    public List<Color32> Colors;
 
     // tasks is a list of integer lists containing values for 0:Event, 1:Frequency, 2:Start Time, 3:Timeout, 4:Status
     public static List<List<int>> tasks = new List<List<int>>();

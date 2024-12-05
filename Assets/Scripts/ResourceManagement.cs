@@ -33,33 +33,16 @@ public class ResourceManagement : MonoBehaviour
     };
 
     public static List<int> flowRates = new List<int>();
-    public static List<List<int>> tasks = new List<List<int>>();
     public static List<List<int>> tankCapacity = new List<List<int>>(); // max capacity // current capacity // Consumption // 
-
     public static List<float> initialCapacity = new List<float> { 0f, 0f };
+
+    // what channel pump // at time (seconds) // timeout //
+    public static List<List<int>> tasks = new List<List<int>>();    
 
     // Start is called before the first frame update
     void Start()
     {
         count = tasks.Count;
-        /*flowRates = new List<int> { 800, 600, 800, 600, 600, 600, 400, 400 };
-        tankConsumption = new List<int> { 800, 800 };
-
-        tankCapacity.Add(new List<int> { 4000, 2500});
-        tankCapacity.Add(new List<int> { 4000, 2500});
-        tankCapacity.Add(new List<int> { 2000, 1000});
-        tankCapacity.Add(new List<int> { 2000, 1000});
-
-        // what channel pump // at time (seconds) // timeout //
-        tasks.Add(new List<int> { 0, 0, 4 });
-        tasks.Add(new List<int> { 1, 7, 4 });
-        tasks.Add(new List<int> { 2, 14, 4 });
-        tasks.Add(new List<int> { 3, 21, 4 });
-        tasks.Add(new List<int> { 4, 28, 4 });
-        tasks.Add(new List<int> { 5, 28, 4 });
-        tasks.Add(new List<int> { 6, 28, 4 });
-        tasks.Add(new List<int> { 7, 28, 4 });*/
-
 
         for (int z = 0; z < pumps.Count; z++)
         {
@@ -176,106 +159,6 @@ public class ResourceManagement : MonoBehaviour
             tankLabel[toTank].GetComponent<Text>().text = tankCapacity[toTank][1].ToString();
             //Debug.Log(tankCapacity[toTank][1]);
         }
-    }
-
-    void depricated()
-        {
-        //
-        //private List<bool> activePump = new List<bool> { false, false, false, false, false, false, false, false };
-        //List<List<List<int>>> connections = new List<List<List<int>>>
-        //  { //inward // outward //
-        //      new List<List<int>> {
-        //          new List<int> { 0, 1, 7 },
-        //          new List<int> { 6 }
-        //          }, //Tank A
-        //      new List<List<int>> {
-        //          new List<int> { 2, 3, 6 },
-        //          new List<int> { 7 }
-        //          }, //Tank B
-        //      new List<List<int>> {
-        //          new List<int> { 4 },
-        //          new List<int> { 0, 1 }
-        //          },    //Tank C
-        //      new List<List<int>> {
-        //          new List<int> { 5 },
-        //          new List<int> { 2, 3 }
-        //          }     //Tank D
-        //  };
-
-        //this function will calculate the new tank values, every 10 seconds.
-        //PS i know my algos are a bit on the complex side.... Dont change them else you might spend your day in debugging.
-
-        //For Tank A
-        //// int Tank1 = ((flowRates[0] * activePump[0]) + (flowRates[1] * activePump[1]) + (flowRates[7] * activePump[7]) - (flowRates[6] * activePump[6]));
-        //// int Tank2 = ((flowRates[2] * activePump[2]) + (flowRates[3] * activePump[3]) + (flowRates[6] * activePump[6]) - (flowRates[7] * activePump[7]));
-        //// int Tank3 = ((flowRates[4] * activePump[4]) - (flowRates[0] * activePump[0]) - (flowRates[1] * activePump[1]));
-        //// int Tank4 = ((flowRates[5] * activePump[5]) - (flowRates[2] * activePump[2]) - (flowRates[3] * activePump[3]));
-
-        /*for(int i = 0; i < 4; i++) 
-        {
-            bool sign = true;
-            int total = 0;
-            foreach(List<int> directions in connections[i])
-            {
-                int TempSum = 0;
-                foreach (int pumpnum in directions) 
-                {
-                    if (sign)
-                    {
-                        if((flowRates[pumpnum] * activePump[pumpnum] / 600) > )
-                        {
-
-                        }
-                    }
-
-
-                    total += flowRates[pumpnum] * activePump[pumpnum] ;
-                }
-                total += TempSum;
-                sign = false;
-            }
-        }*/
-
-        //foreach(List<int> pump in pumps)
-        //{
-        //  if (pump[2] == 1)
-        // {
-
-        // }
-        //}
-
-        //TANK A
-
-        // if (activePump[0])
-        // {
-        //     int temp = flowRates[0] / 600; //Pump 7 (6) connects TANK A (0) and C (2)
-        //     if (temp < tankCapacity[2][1]) //Tank C -- Limited can exhaust.. checks if it has exhausted.
-        //     {
-        //         sum += temp;
-        //         addAndSubtractfromTank(0, 2, temp);
-        //     }
-        //     else { closePump(0); }
-        // }
-
-        //temp = flowRates[1] * activePump[1] / 600; //Tank D -- Unlimited. //Pump 2 (1) connects TANK A (0) and  infinite tank
-        //addAndSubtractfromTank(0, 99, temp);
-        //sum += temp;
-
-        //temp = flowRates[7] * activePump[7] / 600; //Pump 8 (7) connects TANK A (0) and B (1)
-        //if (temp < tankCapacity[1][1]) //Tank B -- Limited
-        //{
-        //   sum += temp;
-        //    addAndSubtractfromTank(0, 1, temp);
-        //}
-        //else { closePump(1); }
-
-        //temp = flowRates[6] * activePump[6] / 600; //Pump 7 (6) connects TANK A (0) and B (1)
-        //if (temp < tankCapacity[0][1])
-        //{
-        //    sum -= temp; //Subtract if resources going out of tank 
-        //    addAndSubtractfromTank(1, 0, temp);
-        //} 
-        //else { closePump(0); }
     }
 
     void pumpTrigger(int number)
