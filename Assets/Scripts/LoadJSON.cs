@@ -16,7 +16,7 @@ public class LoadJSON
     public List<IntListWrapper> Tracking_Tasks = new List<IntListWrapper>();
 
     //Communications 
-    public List<IntListWrapper> Communicaion_Tasks = new List<IntListWrapper>();
+    public List<IntListWrapper> Communication_Tasks = new List<IntListWrapper>();
 
     //Resource Management
     public List<IntListWrapper> Resource_Management_Tasks = new List<IntListWrapper>();
@@ -53,7 +53,7 @@ public class LoadJSON
         }
 
         //Communications 
-        foreach(IntListWrapper COM in Communicaion_Tasks)
+        foreach(IntListWrapper COM in Communication_Tasks)
         {
             CommunicationsTask.tasks.Add(COM.list);
         }
@@ -137,11 +137,11 @@ public class LoadJSON
 
         //Communications
         // what channel ( 0, 1, 2, 3, 4{distractor})// what frequency*100 // at time (seconds) // timeout //
-        Communicaion_Tasks.Add(new IntListWrapper { 0, 126500, 0, 6 });
-        Communicaion_Tasks.Add(new IntListWrapper { 1, 121250, 7, 6 });
-        Communicaion_Tasks.Add(new IntListWrapper { 2, 121100, 14, 6 });
-        Communicaion_Tasks.Add(new IntListWrapper { 3, 120500, 21, 6 });
-        Communicaion_Tasks.Add(new IntListWrapper { 4, 127500, 28, 6 });
+        Communication_Tasks.Add(new IntListWrapper { 0, 126500, 0, 6 });
+        Communication_Tasks.Add(new IntListWrapper { 1, 121250, 7, 6 });
+        Communication_Tasks.Add(new IntListWrapper { 2, 121100, 14, 6 });
+        Communication_Tasks.Add(new IntListWrapper { 3, 120500, 21, 6 });
+        Communication_Tasks.Add(new IntListWrapper { 4, 127500, 28, 6 });
 
         //Resource Management 
         Resource_Management_Flow_Rate = new List<int> { 800, 600, 800, 600, 600, 600, 400, 400 };

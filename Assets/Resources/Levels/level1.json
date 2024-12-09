@@ -1,0 +1,49 @@
+{
+  "System_Monitoring_Tasks": [
+    {"list": [5, 5, 10]},
+    {"list": [6, 30, 10]},
+    {"list": [1, 45, 10]},
+    {"list": [2, 75, 10]},
+    {"list": [3, 80, 10]},
+    {"list": [4, 140, 10]}
+  ],
+  "Tracking_Tasks": [
+    {"list": [10, 10]},
+    {"list": [30, 10]},
+    {"list": [60, 10]},
+    {"list": [90, 10]},
+    {"list": [120, 10]},
+    {"list": [150, 10]},
+    {"list": [180, 10]},
+    {"list": [120, 10]}
+  ],
+  "Communication_Tasks": [
+    {"list": [0, 126500, 1, 10]},
+    {"list": [1, 121250, 25, 10]},
+    {"list": [2, 120500, 50, 10]},
+    {"list": [2, 127500, 25, 10]}
+  ],
+  "Resource_Management_Tasks": [
+    {"list": [0, 14, 10]}
+  ],
+  "Resource_Management_Tank_Capacity": [
+    {"list": [4000, 2500]},
+    {"list": [4000, 2500]},
+    {"list": [2000, 1000]},
+    {"list": [2000, 1000]}
+  ],
+  "Resource_Management_Flow_Rate": [
+    800,
+    600,
+    800,
+    600,
+    600,
+    600,
+    400,
+    400
+  ],
+  "Resource_Management_Tank_Consumption": [
+    800,
+    800
+  ]
+}

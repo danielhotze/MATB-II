@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Net;
 using System.IO;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
 
 public class Loading : MonoBehaviour
 {
@@ -15,18 +15,29 @@ public class Loading : MonoBehaviour
 	#nullable disable
 
 	public TextAsset textAsset;
+	private string currentLevel = "config";
 
 	private LoadJSON loadJSON = new LoadJSON();
 
 	AsyncOperation async;
 
+	void Start()
+    {
+		WebBridge.OnLevelSelected += HandleLevelSelected;
+    }
+
+	private void HandleLevelSelected(string levelName)
+    {
+		currentLevel = levelName;
+    }
+
 	public void loadingScene()
 	{
-		textAsset = Resources.Load("Config") as TextAsset;
+		Debug.Log("Now Loading level: " + currentLevel);
+		textAsset = Resources.Load<TextAsset>("Text/" + currentLevel);
 		string json = textAsset.text;
 		loadJSON.LoadData(loadJSON, json);
-		//string json = JsonUtility.ToJson(loadJSON, true);
-		//loadJSON.WriteToFile(json); //used to generate the sample file, comment the file read part in LoadJSON and uncomment the placeholder tasks and these lines(2).
+
 		StartCoroutine(AsynchronousLoad("TasksScene"));
 	}
 
