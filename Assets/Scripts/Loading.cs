@@ -15,7 +15,7 @@ public class Loading : MonoBehaviour
 	#nullable disable
 
 	public TextAsset textAsset;
-	private string currentLevel = "config";
+	private string currentLevel = "level1";
 
 	private LoadJSON loadJSON = new LoadJSON();
 
@@ -34,7 +34,7 @@ public class Loading : MonoBehaviour
 	public void loadingScene()
 	{
 		Debug.Log("Now Loading level: " + currentLevel);
-		textAsset = Resources.Load<TextAsset>("Text/" + currentLevel);
+		textAsset = Resources.Load<TextAsset>("Levels/" + currentLevel);
 		string json = textAsset.text;
 		loadJSON.LoadData(loadJSON, json);
 

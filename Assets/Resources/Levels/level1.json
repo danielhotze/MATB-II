@@ -1,5 +1,6 @@
 {
   "System_Monitoring_Tasks": [
+    {"list": [6, 2, 10]},
     {"list": [5, 5, 10]},
     {"list": [6, 30, 10]},
     {"list": [1, 45, 10]},

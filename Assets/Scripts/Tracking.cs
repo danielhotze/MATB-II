@@ -88,7 +88,7 @@ public class Tracking : MonoBehaviour
             crosshair.GetComponent<RectTransform>().localPosition = new Vector3(xMovement, yMovement, 0f);
         }
 
-        if (Input.GetKeyDown("f10"))
+        if (Input.GetKeyDown("m"))
         {
             handleButtonTrigger();
         }

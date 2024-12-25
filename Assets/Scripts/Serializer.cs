@@ -48,12 +48,12 @@ public class Serializer : MonoBehaviour
 
         switch (task[0])
         {
-            case 1: ProcessedLine += "F5";  break;
-            case 2: ProcessedLine += "F6"; break;
-            case 3: ProcessedLine += "F1"; break;
-            case 4: ProcessedLine += "F2"; break;
-            case 5: ProcessedLine += "F3"; break;
-            case 6: ProcessedLine += "F4"; break;
+            case 1: ProcessedLine += "1";  break;
+            case 2: ProcessedLine += "2"; break;
+            case 3: ProcessedLine += "3"; break;
+            case 4: ProcessedLine += "4"; break;
+            case 5: ProcessedLine += "5"; break;
+            case 6: ProcessedLine += "6"; break;
             default: ProcessedLine += "Wrong input"; break;
         }
         ProcessedLine += "," + task[1].ToString() + "," + task[2].ToString() + "," + task[3].ToString();

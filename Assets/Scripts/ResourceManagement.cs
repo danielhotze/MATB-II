@@ -49,15 +49,6 @@ public class ResourceManagement : MonoBehaviour
             pumps[z][3] = flowRates[z]; 
         }
 
-        buttons[0].onClick.AddListener(button0click);
-        buttons[1].onClick.AddListener(button1click);
-        buttons[2].onClick.AddListener(button2click);
-        buttons[3].onClick.AddListener(button3click);
-        buttons[4].onClick.AddListener(button4click);
-        buttons[5].onClick.AddListener(button5click);
-        buttons[6].onClick.AddListener(button6click);
-        buttons[7].onClick.AddListener(button7click);
-
         int i = 0;
         foreach (List<int> task in tasks)
         {
@@ -161,7 +152,7 @@ public class ResourceManagement : MonoBehaviour
         }
     }
 
-    void pumpTrigger(int number)
+    public void pumpTrigger(int number)
     {
         //change active status, change color, change flow label
 
@@ -177,39 +168,6 @@ public class ResourceManagement : MonoBehaviour
             buttons[number].GetComponent<Image>().color = colors[2];
             pumpsFlows[number].GetComponent<Text>().text = "0";
         }
-    }
-
-    void button0click()
-    {
-        pumpTrigger(0);
-    }
-    void button1click()
-    {
-        pumpTrigger(1);
-    }
-    void button2click()
-    {
-        pumpTrigger(2);
-    }
-    void button3click()
-    {
-        pumpTrigger(3);
-    }
-    void button4click()
-    {
-        pumpTrigger(4);
-    }
-    void button5click()
-    {
-        pumpTrigger(5);
-    }
-    void button6click()
-    {
-        pumpTrigger(6);
-    }
-    void button7click()
-    {
-        pumpTrigger(7);
     }
 
     IEnumerator disablePumpSchedule(int number, int startTime, int timeout, int id)

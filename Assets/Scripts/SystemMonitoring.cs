@@ -41,7 +41,7 @@ public class SystemMonitoring : MonoBehaviour
         foreach (List<int> task in tasks){
             //Debug.Log(task[0] + " " + task[1] + " " + task[2]);
             tasks[i].Add('0');
-            if (task[0] <= 2)
+            if (task[0] > 4)
             {
                 StartCoroutine(runBtnTask(task[0], task[1], task[2], i));
             }
@@ -56,23 +56,23 @@ public class SystemMonitoring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("f1"))
+        if (Input.GetKeyDown("1"))
         {
             resetBar(0);
         }
-        if (Input.GetKeyDown("f2"))
+        if (Input.GetKeyDown("2"))
         {
             resetBar(1);
         }
-        if (Input.GetKeyDown("f3"))
+        if (Input.GetKeyDown("3"))
         {
             resetBar(2);
         }
-        if (Input.GetKeyDown("f4"))
+        if (Input.GetKeyDown("4"))
         {
             resetBar(3);
         }
-        if (Input.GetKeyDown("f5"))
+        if (Input.GetKeyDown("5"))
         {
             Color32 newCol = top[0].GetComponent<Image>().color;
             if (newCol.Equals(colors[4]))
@@ -84,7 +84,7 @@ public class SystemMonitoring : MonoBehaviour
                 top[0].GetComponent<Image>().color = colors[4];
             }
         }
-        if (Input.GetKeyDown("f6"))
+        if (Input.GetKeyDown("6"))
         {
             Color32 newCol = top[1].GetComponent<Image>().color;
             if (newCol.Equals(colors[1]))
@@ -108,14 +108,14 @@ public class SystemMonitoring : MonoBehaviour
 
     public void acceptButtonClick(string btn)
     {
-        if(btn == "f5")
+        if(btn == "5")
         {
             Color32 newCol = top[0].GetComponent<Image>().color;
             if (newCol.Equals(colors[4]))
             {
                 top[0].GetComponent<Image>().color = colors[0];
             }
-        } else if(btn == "f6")
+        } else if(btn == "6")
         {
             Color32 newCol = top[1].GetComponent<Image>().color;
             if (newCol.Equals(colors[1]))
@@ -129,12 +129,12 @@ public class SystemMonitoring : MonoBehaviour
     {
         yield return new WaitForSeconds(startTime);
         //Do the changes 
-        if(taskNum == 1)
+        if(taskNum == 5)
         {
             top[0].GetComponent<Image>().color = colors[4];
         }
 
-        if (taskNum == 2)
+        if (taskNum == 6)
         {
             top[1].GetComponent<Image>().color = colors[1];
         }
@@ -143,7 +143,7 @@ public class SystemMonitoring : MonoBehaviour
         //Check if human interacted
         //Change back to normal if not
 
-        if (taskNum == 1)
+        if (taskNum == 5)
         {
             Color32 newCol = top[0].GetComponent<Image>().color;
             if (newCol.Equals(colors[4])) // Didn't fix automate
@@ -156,11 +156,11 @@ public class SystemMonitoring : MonoBehaviour
             {
                 tasks[id][3] = 1;
                 serializer.SystemMonitoringAddRecord(tasks[id]);
-                Debug.Log("User Fixed it 1");
+                Debug.Log("User Fixed it 5-Button");
             }
         }
 
-        if (taskNum == 2)
+        if (taskNum == 6)
         {
             Color32 newCol = top[1].GetComponent<Image>().color;
             if (newCol.Equals(colors[1])) // Didn't fix automate
@@ -174,7 +174,7 @@ public class SystemMonitoring : MonoBehaviour
             {
                 tasks[id][3] = 1;
                 serializer.SystemMonitoringAddRecord(tasks[id]);
-                Debug.Log("User Fixed it 2");
+                Debug.Log("User Fixed it 6-Button");
                 score[0]++;
                 score[1]++;
             }
@@ -192,22 +192,22 @@ public class SystemMonitoring : MonoBehaviour
 
         yield return new WaitForSeconds(startTime);
         //Do the changes 
-        barsRandom[taskNum - 3] = false;
+        barsRandom[taskNum] = false;
 
         yield return new WaitForSeconds(timeout);
         //Check if human interacted
         //Change back to normal if not
 
-        if (barsRandom[taskNum - 3] == false)
+        if (barsRandom[taskNum] == false)
         {
-            barsRandom[taskNum - 3] = true;
+            barsRandom[taskNum] = true;
             tasks[id][3] = 0;
             serializer.SystemMonitoringAddRecord(tasks[id]);
             score[1]++;
         }
         else
         {
-            Debug.Log("User Fixed it (bars) " + (taskNum - 3));
+            Debug.Log("User Fixed it (bars) " + (taskNum));
             tasks[id][3] = 1;
             serializer.SystemMonitoringAddRecord(tasks[id]);
             score[0]++;

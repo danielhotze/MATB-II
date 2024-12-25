@@ -24,12 +24,12 @@ Additionally, one can specify "Tank Capacity", "Flow Rates", and "Tank Consumpti
 ```
 The System Monitoring Task is described by a list of objects that contain a list called "list" (for whatever reason?!). <br>
 <b>Element</b>: number representing which sysmon element is targeted by the event
-1. F1-Scale
-2. F2-Scale
-3. F3-Scale
-4. F4-Scale
-5. F5-Button
-6. F6-Button
+1. 1-Scale
+2. 2-Scale
+3. 3-Scale
+4. 4-Scale
+5. 5-Button
+6. 6-Button
 
 <b>Event Time</b>: The time (in seconds) when the event is triggered. <br>
 <b>Event Timeout</b>: The time (in seconds) for how long the user can complete the task until it is marked as "failed" and the normal system state is automatically recovered. <br>
