@@ -11,10 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TasksScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/TLX.unity
-    guid: f8a5e6ec3205d5c48b10872a8443fdbd
   - enabled: 1
     path: Assets/Scenes/Report.unity
     guid: 55d649e9f4ccea048bbb19e96dbae994
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

@@ -15,6 +15,9 @@ public class Report : MonoBehaviour
     {
         calculateScore();
         displayScore();
+        #if UNITY_WEBGL
+            WebBridge.SendPerformanceData(scores.ToString());
+        #endif
         //calculate score of each task
         serializer.saveReport(scores);
     }
@@ -30,9 +33,9 @@ public class Report : MonoBehaviour
     public void calculateScore()
     {
         //Debug.Log(SystemMonitoring.score[0]);
-        scores[0] = ((SystemMonitoring.score[0])*100) / SystemMonitoring.score[1];
-        scores[1] = ((Tracking.score[0])*100) / Tracking.score[1];
-        scores[2] = ((CommunicationsTask.score[0])*100) / CommunicationsTask.score[1];
+        scores[0] = (SystemMonitoring.score[1] != 0) ? (((SystemMonitoring.score[0])*100) / SystemMonitoring.score[1]) : 0;
+        scores[1] = (Tracking.score[1] != 0) ? (((Tracking.score[0])*100) / Tracking.score[1]) : 0;
+        scores[2] = (CommunicationsTask.score[1] != 0) ? (((CommunicationsTask.score[0])*100) / CommunicationsTask.score[1]) : 0;
         scores[3] = calculateResourceManagementScore();
     }
 

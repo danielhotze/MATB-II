@@ -14,7 +14,7 @@ public class SystemMonitoring : MonoBehaviour
 
     public int count = -1;
 
-    public Serializer serializer;
+    //public Serializer serializer;
     public Loading loading;
 
     private float timer = 0f;
@@ -27,29 +27,17 @@ public class SystemMonitoring : MonoBehaviour
     void Start()
     {
         count = tasks.Count;
-        // what // at time (seconds) // timeout //
-        /*tasks.Add(new List<int> { 1, 0, 2 });
-        tasks.Add(new List<int> { 2, 5, 2 });
-        tasks.Add(new List<int> { 1, 5, 2 });
-        tasks.Add(new List<int> { 2, 8, 2 });
-        tasks.Add(new List<int> { 5, 8, 4 });
-        tasks.Add(new List<int> { 1, 15, 2 });
-        tasks.Add(new List<int> { 6, 15, 4 });
-        tasks.Add(new List<int> { 4, 18, 4 });
-        tasks.Add(new List<int> { 3, 20, 4 });*/
-        int i = 0;
-        foreach (List<int> task in tasks){
-            //Debug.Log(task[0] + " " + task[1] + " " + task[2]);
+        for (int i = 0; i < tasks.Count; i++) {
+            Debug.Log("[Sysmon] <Init Task> Btn/Scale: " + (tasks[i][0] + 1) + " | Start: " + tasks[i][1] + " | Timeout: " + tasks[i][2]);
             tasks[i].Add('0');
-            if (task[0] > 4)
+            if (tasks[i][0] < 4)
             {
-                StartCoroutine(runBtnTask(task[0], task[1], task[2], i));
+                StartCoroutine(runBarTask(tasks[i][0], tasks[i][1], tasks[i][2], i));
             }
             else
             {
-                StartCoroutine(runBarTask(task[0], task[1], task[2], i));
+                StartCoroutine(runBtnTask(tasks[i][0], tasks[i][1], tasks[i][2], i));
             }
-            i++;
         }
     }
 
@@ -106,16 +94,16 @@ public class SystemMonitoring : MonoBehaviour
         }
     }
 
-    public void acceptButtonClick(string btn)
+    public void acceptButtonClick(string btnNum)
     {
-        if(btn == "5")
+        if(btnNum == "5")
         {
             Color32 newCol = top[0].GetComponent<Image>().color;
             if (newCol.Equals(colors[4]))
             {
                 top[0].GetComponent<Image>().color = colors[0];
             }
-        } else if(btn == "6")
+        } else if(btnNum == "6")
         {
             Color32 newCol = top[1].GetComponent<Image>().color;
             if (newCol.Equals(colors[1]))
@@ -125,16 +113,17 @@ public class SystemMonitoring : MonoBehaviour
         }
     }
 
-    IEnumerator runBtnTask(int taskNum, int startTime, int timeout, int id)
+    IEnumerator runBtnTask(int btnIndex, int startTime, int timeout, int id)
     {
         yield return new WaitForSeconds(startTime);
+        Debug.Log("[Sysmon] <Start Task> Btn: " + (btnIndex + 1) + " | Start: " + startTime + " | Timeout: " + timeout);
         //Do the changes 
-        if(taskNum == 5)
+        if (btnIndex == 4)
         {
             top[0].GetComponent<Image>().color = colors[4];
         }
 
-        if (taskNum == 6)
+        if (btnIndex == 5)
         {
             top[1].GetComponent<Image>().color = colors[1];
         }
@@ -143,38 +132,38 @@ public class SystemMonitoring : MonoBehaviour
         //Check if human interacted
         //Change back to normal if not
 
-        if (taskNum == 5)
+        if (btnIndex == 4)
         {
             Color32 newCol = top[0].GetComponent<Image>().color;
             if (newCol.Equals(colors[4])) // Didn't fix automate
             {
                 top[0].GetComponent<Image>().color = colors[0];
                 tasks[id][3] = 0;
-                serializer.SystemMonitoringAddRecord(tasks[id]);
+                //serializer.SystemMonitoringAddRecord(tasks[id]);
             }
             else
             {
                 tasks[id][3] = 1;
-                serializer.SystemMonitoringAddRecord(tasks[id]);
-                Debug.Log("User Fixed it 5-Button");
+                //serializer.SystemMonitoringAddRecord(tasks[id]);
+                Debug.Log("User Fixed 5-Button");
             }
         }
 
-        if (taskNum == 6)
+        if (btnIndex == 5)
         {
             Color32 newCol = top[1].GetComponent<Image>().color;
             if (newCol.Equals(colors[1])) // Didn't fix automate
             {
                 top[1].GetComponent<Image>().color = colors[4];
                 tasks[id][3] = 0;
-                serializer.SystemMonitoringAddRecord(tasks[id]);
+                //serializer.SystemMonitoringAddRecord(tasks[id]);
                 score[1]++;
             }
             else
             {
                 tasks[id][3] = 1;
-                serializer.SystemMonitoringAddRecord(tasks[id]);
-                Debug.Log("User Fixed it 6-Button");
+                //serializer.SystemMonitoringAddRecord(tasks[id]);
+                Debug.Log("User Fixed 6-Button");
                 score[0]++;
                 score[1]++;
             }
@@ -187,29 +176,29 @@ public class SystemMonitoring : MonoBehaviour
         }
     }
 
-    IEnumerator runBarTask(int taskNum, int startTime, int timeout, int id)
+    IEnumerator runBarTask(int barIndex, int startTime, int timeout, int id)
     {
-
         yield return new WaitForSeconds(startTime);
         //Do the changes 
-        barsRandom[taskNum] = false;
+        barsRandom[barIndex] = false;
 
         yield return new WaitForSeconds(timeout);
+        Debug.Log("[Sysmon] <Start Task> Scale: " + (barIndex + 1) + " | Start: " + startTime + " | Timeout: " + timeout);
         //Check if human interacted
         //Change back to normal if not
 
-        if (barsRandom[taskNum] == false)
+        if (barsRandom[barIndex] == false)
         {
-            barsRandom[taskNum] = true;
+            barsRandom[barIndex] = true;
             tasks[id][3] = 0;
-            serializer.SystemMonitoringAddRecord(tasks[id]);
+            //serializer.SystemMonitoringAddRecord(tasks[id]);
             score[1]++;
         }
         else
         {
-            Debug.Log("User Fixed it (bars) " + (taskNum));
+            Debug.Log("User fixed (bars) " + (barIndex + 1));
             tasks[id][3] = 1;
-            serializer.SystemMonitoringAddRecord(tasks[id]);
+            //serializer.SystemMonitoringAddRecord(tasks[id]);
             score[0]++;
             score[1]++;
         }

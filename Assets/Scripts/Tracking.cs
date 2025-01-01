@@ -21,7 +21,7 @@ public class Tracking : MonoBehaviour
 
     public int count = -1;
 
-    public Serializer serializer;
+    //public Serializer serializer;
     public Loading loading;
 
     public static List<List<int>> tasks = new List<List<int>>();
@@ -31,12 +31,6 @@ public class Tracking : MonoBehaviour
     void Start()
     {
         count = tasks.Count;
-        // at time (seconds) // timeout //
-        /*tasks.Add(new List<int> { 0, 4 });
-        tasks.Add(new List<int> { 7, 4 });
-        tasks.Add(new List<int> { 14, 4 });
-        tasks.Add(new List<int> { 21, 4 });*/
-        button.GetComponent<Button>().onClick.AddListener(handleButtonTrigger);
 
         int i = 0;
         foreach (List<int> task in tasks)
@@ -95,7 +89,7 @@ public class Tracking : MonoBehaviour
 
     }
 
-    void handleButtonTrigger()
+    public void handleButtonTrigger()
     {
         if (button.GetComponent<Image>().color == colors[0])
         {
@@ -158,14 +152,14 @@ public class Tracking : MonoBehaviour
         {
             //user fixed it.
             tasks[id][2] = 1;
-            serializer.TrackingTaskAddReord(tasks[id]);
+            //serializer.TrackingTaskAddReord(tasks[id]);
             score[0]++;
             score[1]++;
         }
         else
         {
             tasks[id][2] = 0;
-            serializer.TrackingTaskAddReord(tasks[id]);
+            //serializer.TrackingTaskAddReord(tasks[id]);
             score[1]++;
         }
         count--;

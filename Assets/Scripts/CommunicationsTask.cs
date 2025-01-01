@@ -33,7 +33,7 @@ public class CommunicationsTask : MonoBehaviour
     // public int count = -1;
 
     // For connection to outside scripts (Serializer, Loading, Results)
-    public Serializer serializer;
+    //public Serializer serializer;
     public Loading loading;
     public static List<int> score = new List<int> { 0, 0 };
 
@@ -192,7 +192,7 @@ public class CommunicationsTask : MonoBehaviour
 
             // set task status to 2 -> "event correctly ignored"
             tasks[taskIndex][4] = 2;
-            serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
+            //serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
             addTaskScore(true);
 
             // allow other tasks to fire
@@ -203,7 +203,7 @@ public class CommunicationsTask : MonoBehaviour
             // set task status to 0 -> "event failed" (timeout)
             Debug.Log("Communication Task Fail (Timeout): [" + taskChannel + "]: " + taskFrequency);
             tasks[taskIndex][4] = 0;
-            serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
+            //serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
             addTaskScore(false);
 
             // allow other tasks to fire
@@ -216,7 +216,7 @@ public class CommunicationsTask : MonoBehaviour
     {
         Debug.Log("Communication Task Success (User fix): [" + taskChannel + "]: " + taskFrequency);
         tasks[taskIndex][4] = 1;
-        serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
+        //serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
         addTaskScore(true);
 
         // allow other tasks to fire
@@ -228,7 +228,7 @@ public class CommunicationsTask : MonoBehaviour
     {
         Debug.Log("Communication Task Fail (Wrong Input): [" + taskChannel + "]: " + taskFrequency);
         tasks[taskIndex][4] = 0;
-        serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
+        //serializer.CommunicationsTaskAddRecord(tasks[taskIndex]);
         addTaskScore(false);
 
         // allow other tasks to fire

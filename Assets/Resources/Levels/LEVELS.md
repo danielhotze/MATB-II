@@ -23,13 +23,14 @@ Additionally, one can specify "Tank Capacity", "Flow Rates", and "Tank Consumpti
 }
 ```
 The System Monitoring Task is described by a list of objects that contain a list called "list" (for whatever reason?!). <br>
-<b>Element</b>: number representing which sysmon element is targeted by the event
+<b>Element</b>: number from 1 to 6 representing which sysmon element is targeted by the event
 1. 1-Scale
 2. 2-Scale
 3. 3-Scale
 4. 4-Scale
 5. 5-Button
 6. 6-Button
+<br>The key mapping is different to the "original" MATB-Task as there are conflicts of the F1-F10 key with default browser behavior such as page-refresh that are difficult to block from being executed.
 
 <b>Event Time</b>: The time (in seconds) when the event is triggered. <br>
 <b>Event Timeout</b>: The time (in seconds) for how long the user can complete the task until it is marked as "failed" and the normal system state is automatically recovered. <br>
@@ -80,7 +81,7 @@ The user then must click on the (now red) pump to "fix" it.
   ],
 }
 ```
-<b>Pump</b>: A number from 0 to 7 representing the pumps 1 to 8 (for whatever reason his representation was chosen - I am honestly starting to loose my mind because of how the reference project was written). <br> However, the pump with that references this number will then "break" and turn red and the user must click on that pump to fix it.
+<b>Pump</b>: A number representing the pumps 1 to 8 (for whatever reason his representation was chosen - I am honestly starting to loose my mind because of how the reference project was written). <br> However, the pump with that references this number will then "break" and turn red and the user must click on that pump to fix it.
 <b>Event Time</b>: The time (in seconds) when the event is triggered and the tracking enters "manual" mode. <br>
 <b>Event Timeout</b>: The time (in seconds) for how long the user can complete the task until it is marked as "failed" and the normal system state is automatically recovered. <br>
 
@@ -93,7 +94,6 @@ There is no need to specify tank capacity for the unlimited tanks E and F.
     {"list": [maxCapacity, initialCapacity]}, // Tank B
     {"list": [maxCapacity, initialCapacity]}, // Tank C
     {"list": [maxCapacity, initialCapacity]}  // Tank D
-    ...
   ],
 }
 ```

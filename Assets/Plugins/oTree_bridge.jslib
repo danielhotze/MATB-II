@@ -1,9 +1,15 @@
 mergeInto(LibraryManager.library, 
 {
-  ReceivePerformanceData: function(data)
+  SendPerformanceData: function(data)
   {
     console.log("Sending performance data to window: ", data);
     // window.parent.postMessage(data, '*');
-    window.parent.receivePerformanceData(data);
+    window.receivePerformanceData(data);
   },
+
+  RequestDifficultyLevel: function()
+  {
+    console.log("Requesting difficulty level from frontend.");
+    window.sendDifficultyLevel()
+  }
 });

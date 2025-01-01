@@ -23,7 +23,10 @@ public class Loading : MonoBehaviour
 
 	void Start()
     {
-		WebBridge.OnLevelSelected += HandleLevelSelected;
+		#if UNITY_WEBGL
+			WebBridge.OnLevelSelected += HandleLevelSelected;
+			WebBridge.RequestDifficultyLevel();
+		#endif
     }
 
 	private void HandleLevelSelected(string levelName)

@@ -1,6 +1,5 @@
 {
   "System_Monitoring_Tasks": [
-    {"list": [6, 2, 10]},
     {"list": [5, 5, 10]},
     {"list": [6, 30, 10]},
     {"list": [1, 45, 10]},
@@ -25,7 +24,7 @@
     {"list": [2, 127500, 25, 10]}
   ],
   "Resource_Management_Tasks": [
-    {"list": [0, 14, 10]}
+    {"list": [1, 14, 10]}
   ],
   "Resource_Management_Tank_Capacity": [
     {"list": [4000, 2500]},

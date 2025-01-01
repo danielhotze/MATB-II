@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ResourceManagement : MonoBehaviour
 {
-    public List<GameObject> pumpsFlows;
+    public List<TextMeshProUGUI> pumpsFlows;
     public List<GameObject> tanks;
     public List<Button> buttons;
-    public List<GameObject> tankLabel;
+    public List<TextMeshProUGUI> tankLabel;
+    // color: 0 -> white (inactive) | 1 -> green (active) | 2 -> red (broken)
     public List<Color32> colors = new List<Color32>();
 
     public int count = -1;
 
-    public Serializer serializer;
+    //public Serializer serializer;
     public Loading loading;
 
     private float timer = 0f;
 
     public static List<List<int>> pumps = new List<List<int>>
     {   // From // To // active // flowrate
+        // active can be: 0 -> inactive | 1 -> active | 2 -> broken
         new List<int> { 2, 0 , 0 , 800}, 
         new List<int> { 42, 0 , 0 , 600},
         new List<int> { 3, 1 , 0 , 800},
@@ -118,17 +121,17 @@ public class ResourceManagement : MonoBehaviour
                 }
             }
         }
-        serializer.ResourceManagementAddRecord();
+        //serializer.ResourceManagementAddRecord();
     }
 
-    void closePump(int number)
+    void closePump(int pumpIndex)
     {
-        //Debug.Log("CLOSE PUMP CALLED"); 
-        pumps[number][2] = 0;
+        Debug.Log("CLOSE PUMP CALLED FOR PUMP: " + (pumpIndex + 1)); 
+        pumps[pumpIndex][2] = 0;
 
         //change color & Flow label below
-        buttons[number].GetComponent<Image>().color = colors[2];
-        pumpsFlows[number].GetComponent<Text>().text = "0";
+        buttons[pumpIndex].GetComponent<Image>().color = colors[0];
+        pumpsFlows[pumpIndex].text = "0";
     }
 
     void addAndSubtractfromTank(int toTank, int fromTank, int value)
@@ -138,49 +141,55 @@ public class ResourceManagement : MonoBehaviour
         {
             tankCapacity[fromTank][1] -= value;
             
-            tanks[fromTank].GetComponent<Slider>().value = (float)tankCapacity[fromTank][1] / (float)tankCapacity[fromTank][0];
-            tankLabel[fromTank].GetComponent<Text>().text = tankCapacity[fromTank][1].ToString();
+            tanks[fromTank].GetComponent<Slider>().value = ((float)tankCapacity[fromTank][0] != 0) ? ((float)tankCapacity[fromTank][1] / (float)tankCapacity[fromTank][0]) : 0;
+            tankLabel[fromTank].text = tankCapacity[fromTank][1].ToString();
             //Debug.Log(tankCapacity[fromTank][1]);
         }
         if(toTank != 42)
         {
             tankCapacity[toTank][1] += value;
 
-            tanks[toTank].GetComponent<Slider>().value = (float)tankCapacity[toTank][1] / (float)tankCapacity[toTank][0];
-            tankLabel[toTank].GetComponent<Text>().text = tankCapacity[toTank][1].ToString();
+            tanks[toTank].GetComponent<Slider>().value = ((float)tankCapacity[toTank][0] != 0) ? ((float)tankCapacity[toTank][1] / (float)tankCapacity[toTank][0]) : 0;
+            tankLabel[toTank].text = tankCapacity[toTank][1].ToString();
             //Debug.Log(tankCapacity[toTank][1]);
         }
     }
 
-    public void pumpTrigger(int number)
+    public void pumpTrigger(int pumpIndex)
     {
         //change active status, change color, change flow label
-
-        if(pumps[number][2] == 0)
+        // active can be: 0 -> inactive | 1 -> active | 2 -> broken
+        Debug.Log("Pump Trigger called for pump " + (pumpIndex + 1));
+        if (pumps[pumpIndex][2] == 0) //if pump is inactive (0), set pump to active
         {
-            pumps[number][2] = 1;
-            buttons[number].GetComponent<Image>().color = colors[1];
-            pumpsFlows[number].GetComponent<Text>().text = pumps[number][3].ToString();
+            pumps[pumpIndex][2] = 1;
+            buttons[pumpIndex].GetComponent<Image>().color = colors[1];
+            pumpsFlows[pumpIndex].text = pumps[pumpIndex][3].ToString();
         }
-        else if (pumps[number][2] == 1)
+        else //if pump is active (1) or broken (2), potentially "fix" it and set to inactive
         {
-            pumps[number][2] = 0;
-            buttons[number].GetComponent<Image>().color = colors[2];
-            pumpsFlows[number].GetComponent<Text>().text = "0";
+            pumps[pumpIndex][2] = 0;
+            buttons[pumpIndex].GetComponent<Image>().color = colors[0];
+            pumpsFlows[pumpIndex].text = "0";
         }
     }
 
-    IEnumerator disablePumpSchedule(int number, int startTime, int timeout, int id)
+    IEnumerator disablePumpSchedule(int pumpIndex, int startTime, int timeout, int id)
     {
         yield return new WaitForSeconds(startTime);
-        pumps[number][2] = 2;
-        buttons[number].GetComponent<Image>().color = colors[0];
-        pumpsFlows[number].GetComponent<Text>().text = "0";
+        Debug.Log("[Resman] <Start Task> Pump: " + (pumpIndex + 1) + " | Start: " + startTime + " | Timeout: " + timeout);
+        // active can be: 0 -> inactive | 1 -> active | 2 -> broken
+        pumps[pumpIndex][2] = 2; // set active status to "broken"
+        buttons[pumpIndex].GetComponent<Image>().color = colors[2];
+        pumpsFlows[pumpIndex].text = "0";
 
         yield return new WaitForSeconds(timeout);
-        pumps[number][2] = 0;
-        buttons[number].GetComponent<Image>().color = colors[2];
-        pumpsFlows[number].GetComponent<Text>().text = "0";
+        if (pumps[pumpIndex][2] == 2) // after the timeout, fix the broken pump automatically
+        {
+            pumps[pumpIndex][2] = 0;
+            buttons[pumpIndex].GetComponent<Image>().color = colors[0];
+            pumpsFlows[pumpIndex].text = "0";
+        }
 
         count--;
         if (count == 0)

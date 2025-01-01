@@ -5,11 +5,11 @@ public class WebBridge : MonoBehaviour
 {
     public string currentLevel;
 
+    [DllImport("__Internal")]
+    public static extern void RequestDifficultyLevel();
+
     public delegate void LevelSelectedEventHandler(string levelName);
     public static event LevelSelectedEventHandler OnLevelSelected;
-
-    [DllImport("__Internal")]
-    private static extern void ReceivePerformanceData(string data);
 
     public void SetLevel(string levelName)
     {
@@ -18,8 +18,6 @@ public class WebBridge : MonoBehaviour
         OnLevelSelected?.Invoke(levelName);
     }
 
-    public void SendPerformanceData(string data)
-    {
-        ReceivePerformanceData(data);
-    }
+    [DllImport("__Internal")]
+    public static extern void SendPerformanceData(string data);
 }

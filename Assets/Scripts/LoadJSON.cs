@@ -29,11 +29,6 @@ public class LoadJSON
         loadJSON = new LoadJSON();
         JsonUtility.FromJsonOverwrite(json, loadJSON);
 
-        /*
-        //FOR TESTS
-        placeHolderTasks();
-        */
-
         //Done now forward the data
         loadJSON.passData();
     }
@@ -43,6 +38,7 @@ public class LoadJSON
         //System Monitoring 
         foreach (IntListWrapper sysMon in System_Monitoring_Tasks)
         {
+            sysMon.list[0]-= 1; // convert scale/button number (1-6) to index (0-5)
             SystemMonitoring.tasks.Add(sysMon.list);
         }
 
@@ -58,9 +54,12 @@ public class LoadJSON
             CommunicationsTask.tasks.Add(COM.list);
         }
 
-        //Resource Management
+        //Resource Management Pump Tasks
         foreach(IntListWrapper ResMan in Resource_Management_Tasks)
         {
+            UnityEngine.Debug.Log(ResMan.list[0]);
+            ResMan.list[0]-= 1; //convert pump number (1-8) to pump index (0-7)
+            UnityEngine.Debug.Log(ResMan.list[0]);
             ResourceManagement.tasks.Add(ResMan.list);
         }
 
@@ -113,55 +112,6 @@ public class LoadJSON
             return "";
         }
     }
-
-    private void placeHolderTasks()
-    {
-        //System monitoring
-        // what // at time (seconds) // timeout //
-        System_Monitoring_Tasks.Add(new IntListWrapper { 1, 0, 2 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 2, 5, 2 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 1, 5, 2 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 2, 8, 2 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 5, 8, 4 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 1, 15, 2 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 6, 15, 4 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 4, 18, 4 });
-        System_Monitoring_Tasks.Add(new IntListWrapper { 3, 20, 4 });
-
-        //Tracking
-        // at time (seconds) // timeout //
-        Tracking_Tasks.Add(new IntListWrapper { 0, 4 });
-        Tracking_Tasks.Add(new IntListWrapper { 7, 4 });
-        Tracking_Tasks.Add(new IntListWrapper { 14, 4 });
-        Tracking_Tasks.Add(new IntListWrapper { 21, 4 });
-
-        //Communications
-        // what channel ( 0, 1, 2, 3, 4{distractor})// what frequency*100 // at time (seconds) // timeout //
-        Communication_Tasks.Add(new IntListWrapper { 0, 126500, 0, 6 });
-        Communication_Tasks.Add(new IntListWrapper { 1, 121250, 7, 6 });
-        Communication_Tasks.Add(new IntListWrapper { 2, 121100, 14, 6 });
-        Communication_Tasks.Add(new IntListWrapper { 3, 120500, 21, 6 });
-        Communication_Tasks.Add(new IntListWrapper { 4, 127500, 28, 6 });
-
-        //Resource Management 
-        Resource_Management_Flow_Rate = new List<int> { 800, 600, 800, 600, 600, 600, 400, 400 };
-        Resource_Management_Tank_Consumption = new List<int> { 800, 800 };
-
-        Resource_Management_Tank_Capacity.Add(new IntListWrapper { 4000, 2500 });
-        Resource_Management_Tank_Capacity.Add(new IntListWrapper { 4000, 2500 });
-        Resource_Management_Tank_Capacity.Add(new IntListWrapper { 2000, 1000 });
-        Resource_Management_Tank_Capacity.Add(new IntListWrapper { 2000, 1000 });
-
-        // what channel pump // at time (seconds) // timeout //
-        Resource_Management_Tasks.Add(new IntListWrapper { 0, 0, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 1, 7, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 2, 14, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 3, 21, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 4, 28, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 5, 28, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 6, 28, 4 });
-        Resource_Management_Tasks.Add(new IntListWrapper { 7, 28, 4 });
-    } 
 }
 
 [Serializable]
