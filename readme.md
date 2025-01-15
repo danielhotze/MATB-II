@@ -15,17 +15,11 @@ Project contins a NASA MATB like interface with 4 tasks:
 4. Resource Management Task
    
    ### Versions of softwares used:
-- [x] Unity Version Used - 6000.0.25f1
+- [x] Unity Version Used - 6000.0.28f1
   
-   
-## 📃 DRDO (Defence Research and Development Organisation) Internship Certificate:
-<p align="center">
-<img src="https://user-images.githubusercontent.com/54114888/143779771-97d3e745-3353-4376-b8e0-3af49cba23eb.png" width="600" height="">
-</p>
 
 ## 🌐 References Used:
-- https://store.steampowered.com/app/502500/ACE_COMBAT_7_SKIES_UNKNOWN/
-- https://software.nasa.gov/software/LAR-17835-1
+- https://github.com/Akash-Ramjyothi/NASA-MATB-II-System
 - https://matb.larc.nasa.gov/
-- https://ntrs.nasa.gov/api/citations/20110014456/downloads/20110014456.pdf   
-- https://github.com/VrdrKv/MATB
+- https://github.com/juliencegarra/OpenMATB
+- 

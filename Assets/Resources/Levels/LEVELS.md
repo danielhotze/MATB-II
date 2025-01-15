@@ -3,7 +3,7 @@ Please note that I did not define the structure for the level-description json m
 I would recommend to rework the json structure but this task would be out of scope for the seminar.
 
 ### Why create levels?
-This project already contains 3 levels of difficulty, each with 5 minutes of tasks.
+This project already contains 3 levels of difficulty, each with 5 minutes (300s) of tasks.
 When you want a different timespan for your experiment or more control over the tasks that you want to execute, you should create a new level.
 
 ### How to use a level?
