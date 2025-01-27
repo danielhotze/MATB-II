@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SystemMonitoring : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class SystemMonitoring : MonoBehaviour
     public List<GameObject> bars = new List<GameObject>();
     public List<bool> barsRandom = new List<bool>();
     private List<int> dirs = new List<int>() { 1 , 1 , 1 , 1 };
+
+    public TMP_InputField commInputField;
 
     public int count = -1;
 
@@ -44,44 +47,39 @@ public class SystemMonitoring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("1"))
-        {
-            resetBar(0);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            resetBar(1);
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            resetBar(2);
-        }
-        if (Input.GetKeyDown("4"))
-        {
-            resetBar(3);
-        }
-        if (Input.GetKeyDown("5"))
-        {
-            Color32 newCol = top[0].GetComponent<Image>().color;
-            if (newCol.Equals(colors[4]))
+        //don't take inputs while communications input field is focused to avoid unexpected behavior
+        if (commInputField == null || !commInputField.isFocused) {
+            if (Input.GetKeyDown("1"))
             {
-                top[0].GetComponent<Image>().color = colors[0];
+                resetBar(0);
             }
-            else
+            if (Input.GetKeyDown("2"))
             {
-                top[0].GetComponent<Image>().color = colors[4];
+                resetBar(1);
             }
-        }
-        if (Input.GetKeyDown("6"))
-        {
-            Color32 newCol = top[1].GetComponent<Image>().color;
-            if (newCol.Equals(colors[1]))
+            if (Input.GetKeyDown("3"))
             {
-                top[1].GetComponent<Image>().color = colors[4];
+                resetBar(2);
             }
-            else
+            if (Input.GetKeyDown("4"))
             {
-                top[1].GetComponent<Image>().color = colors[1];
+                resetBar(3);
+            }
+            if (Input.GetKeyDown("5"))
+            {
+                Color32 newCol = top[0].GetComponent<Image>().color;
+                if (newCol.Equals(colors[4]))
+                {
+                    top[0].GetComponent<Image>().color = colors[0];
+                }
+            }
+            if (Input.GetKeyDown("6"))
+            {
+                Color32 newCol = top[1].GetComponent<Image>().color;
+                if (newCol.Equals(colors[1]))
+                {
+                    top[1].GetComponent<Image>().color = colors[4];
+                }
             }
         }
 

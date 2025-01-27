@@ -63,6 +63,7 @@ public class CommunicationsTask : MonoBehaviour
     {
         if(!taskRunning)
         {
+            Debug.Log("Communications Task already running. Cannot process submit.");
             return;
         }
         // Read channel and frequency inputs from GameObjects
@@ -208,6 +209,8 @@ public class CommunicationsTask : MonoBehaviour
 
             // allow other tasks to fire
             CallSignContainer.GetComponent<Image>().color = Colors[0];
+            CallSign[0].text = "X";
+            CallSign[1].text = "XXX.XXX";
             taskRunning = false;
         }
     }
@@ -233,6 +236,8 @@ public class CommunicationsTask : MonoBehaviour
 
         // allow other tasks to fire
         CallSignContainer.GetComponent<Image>().color = Colors[0];
+        CallSign[0].text = "X";
+        CallSign[1].text = "XXX.XXX";
         taskRunning = false;
     }
 

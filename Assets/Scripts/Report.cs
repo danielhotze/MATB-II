@@ -8,18 +8,20 @@ public class Report : MonoBehaviour
     public List<Text> texts;
     public Serializer serializer;
     public GameObject workloadScore;
-    public static List<int> scores = new List<int> { 0, 0, 0, 0, 0};
+    public static List<int> scores = new List<int> { 0, 0, 0, 0 };
+    private string scoresString;
 
     // Start is called before the first frame update
     void Start()
     {
         calculateScore();
         displayScore();
+
         #if UNITY_WEBGL
-            WebBridge.SendPerformanceData(scores.ToString());
+            WebBridge.SendPerformanceData(scoresString);
         #endif
         //calculate score of each task
-        serializer.saveReport(scores);
+        //serializer.saveReport(scores);
     }
 
     public void displayScore()
@@ -37,6 +39,8 @@ public class Report : MonoBehaviour
         scores[1] = (Tracking.score[1] != 0) ? (((Tracking.score[0])*100) / Tracking.score[1]) : 0;
         scores[2] = (CommunicationsTask.score[1] != 0) ? (((CommunicationsTask.score[0])*100) / CommunicationsTask.score[1]) : 0;
         scores[3] = calculateResourceManagementScore();
+        scoresString = scores[0].ToString() + ";" + scores[1].ToString() + ";" + scores[2].ToString() + ";" + scores[3].ToString();
+        Debug.Log("Scores were calculated: " + scoresString);
     }
 
     private int calculateResourceManagementScore() //As per MATB, checks if both tanks are in +- 500 of starting value, and grades accordingly,
@@ -74,12 +78,15 @@ public class Report : MonoBehaviour
 
     public void QuitGame()
     {
+    #if UNITY_WEBGL
+                WebBridge.QuitGame();
+    #endif
     #if UNITY_EDITOR
-            // Application.Quit() does not work in the editor so
-            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-                UnityEditor.EditorApplication.isPlaying = false;
+                // Application.Quit() does not work in the editor so
+                // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+                    UnityEditor.EditorApplication.isPlaying = false;
     #else
-            Application.Quit();
+        Application.Quit();
 
     #endif
     }

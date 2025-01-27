@@ -20,4 +20,7 @@ public class WebBridge : MonoBehaviour
 
     [DllImport("__Internal")]
     public static extern void SendPerformanceData(string data);
+
+    [DllImport("__Internal")]
+    public static extern void QuitGame();
 }
